@@ -1,0 +1,79 @@
+/* ORDEN GENERAL */
+body{
+    color: #534340;
+    background-size: 100vw 100vh;
+    background-color: #C5D8A4;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: verdana;
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    text-align: center;
+    color: #BB9981;
+    background-color: #F4FCD9;
+    padding: 20px;
+    border-radius: 15px;    
+}
+
+#usadas{
+    padding: 20px;
+    margin-top: 30px;
+    color: #F4FCD9;
+    background-color: #BB9981;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+
+table{
+    text-align: center;
+    border: hidden;
+}
+
+input{
+    width: 100%;
+}
+
+
+
+.juego{
+    display: flex;
+    flex-direction: row;
+}
+
+/* ESTÉTICO */
+#tablero{
+    font-size:30px;
+}
+
+td{
+    background-color: #534340;
+    color: white;
+    width: 35px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn{
+    text-align: center;
+    background-color: #BB9981;
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 15px;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size:20px;
+    outline: none;
+}
+
+.btn:hover{
+    color: #BB9981;
+    background-color:#534340;
+    transition: 0.4s;
+}
+

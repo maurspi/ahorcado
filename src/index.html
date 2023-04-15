@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ahorcado v 1.0</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+  </head>
+  <body>
+    <h1>Juego del Ahorcado</h1>
+    <div class="main">
+
+      <div class="container">
+        <h4>¡Adivina la palabra!</h4>
+
+        <div class="mesa">
+          <div class="juego">
+            <div id="ahorcado">
+            <img src="img/0.png">
+          </div>
+          <div id="palabras">
+            <div id="tablero"></div>
+            <h4>Ingresa una letra:</h4>      
+            <div class="casillaIngreso">      
+              <input type="text" name="nombre" maxlength="1" onkeyup="this.value = this.value.toUpperCase();" />
+            </div>              
+            <div id="status"></div>
+
+            <div id="usadas"></div>
+            <div id="victoria"></div>
+          </div>
+        </div>
+        
+      </div>
+      
+
+    </div>
+    <div>
+      <button class="btn" type="button" onclick="window.location.reload();">Volver a Jugar</button>
+    </div>
+
+  </body>
+  <script src="js/script.js"></script>
+</html>
+
