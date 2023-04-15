@@ -1,46 +1,20 @@
+//El tipo de dato en las variables, se determina en tiempo de ejecución. No se declara como en java o c.
 const palabrAdivinar = ingresarPalabra();
 let arrCoincidencias = [];
 let arrUsadas = [];
 let errados = 0;
 let vidas = 5;
 let aciertos = 0;
+const letra = document.querySelector('input');  // Trae el valor del tipo de input , que se ingresa desde el HTML
 
-const letra = document.querySelector('input');  
-letra.oninput = function(){  //oninput cada vez que el ususario escriba en el input
-    soloLetras(letra.value.toUpperCase(), palabrAdivinar); //convierto las letras a mayuscula tmb
-};
-
-function ingresarPalabra(){
-    const palabra = prompt("Ingresa una palabra para adivinar!");
-    const uppercase = palabra.toUpperCase();
-    if(!/^[a-zA-Z]+$/.test(uppercase)) {
-        alert("Palabra no permitida.");
-        window.location.reload();
-    } else {
-        const arrPalabra = uppercase.split("");
-    document.getElementById("tablero").innerHTML = `
-        <table border="1">
-            <tr>
-                ${creaTablero(arrPalabra)}    
-            </tr>    
-        </table>
-    `;
-    return arrPalabra;
-    }
-};
-
-
-function creaTablero(arrPalabra){
-    let tablero = "";
-    arrPalabra.forEach(letra => {
-        tablero += "<td> ? </td>";
-    });
-    return tablero;
+letra.oninput = function(){  //onInput se activa cada vez que desde el input se ingresa un valor.
+   
+    soloLetras(letra.value.toUpperCase().palabrAdivinar); //convierto las letras a mayuscula tmb
 };
 
 function soloLetras(cadena, palabrAdivinar,arrCoincidencias){
-    const pattern = new RegExp('[a-zA-Z]'); //RegExp se utiliza para hacer coincidir texto con un patrón
-    console.log(pattern.test(cadena)); //aber si coincide con el patron
+    const pattern = new RegExp('[a-zA-Z]'); //Patrón de búsqueda para manipular cadenas de texto.
+    console.log(pattern.test(cadena)); //Test: evalúa si una cadena de texto coincide con una expresión regular.
     if(!pattern.test(cadena)){
         document.querySelector('input').value = ""; //vuelve a nada el valor del input
         document.getElementById("status").innerHTML = "Solo puedes ingresar letras!!!";
@@ -63,14 +37,43 @@ function soloLetras(cadena, palabrAdivinar,arrCoincidencias){
     }
 };
 
+
+function ingresarPalabra(){
+    const palabra = prompt("Ingresa una palabra para adivinar!");
+    const uppercase = palabra.toUpperCase();
+    if(!/^[a-zA-Z]+$/.test(uppercase)) {
+        alert("Palabra no permitida.");
+        window.location.reload(); // envia petición al server para recargar la pag.
+    } else {
+        const arrPalabra = uppercase.split(""); // split busca conincidencias
+    document.getElementById("tablero").innerHTML = `
+        <table border="1">
+            <tr>
+                ${creaTablero(arrPalabra)}    
+            </tr>    
+        </table>
+    `;
+    return arrPalabra;
+    }
+};
+
+
+function creaTablero(arrPalabra){
+    let tablero = "";
+    arrPalabra.forEach(letra => {
+        tablero += "<td> ? </td>";
+    });
+    return tablero;
+};
+
+
 function buscarCoincidencia(letra, arrPalabra){
     let tablero = "";
     let coincidencias = 0;
 
     arrPalabra.forEach(caracter => {
         document.getElementById("usadas").innerHTML = `
-            <h3> ${arrUsadas} </h3>
-            `;
+            <h3> ${arrUsadas} </h3>`;
 
         if(caracter == letra){
             tablero = tablero + "<td style='background-color: #C5D8A4'>"+ caracter +" </td>"; //imprime la tabla con la letra que si
@@ -116,7 +119,7 @@ function victoria(){
     if(vidas<0){
         document.getElementById("palabras").innerHTML = `
         <h3> Perdiste :( </h3>
-        <h4>La palabra era ${palabrAdivinar}</h4>
+        <h4>La palabra es ${palabrAdivinar}</h4>
         `;
     }
     else if(aciertos == palabrAdivinar.length){
