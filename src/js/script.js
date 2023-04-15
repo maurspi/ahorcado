@@ -9,7 +9,7 @@ const letra = document.querySelector('input');  // Trae el valor del tipo de inp
 
 letra.oninput = function(){  //onInput se activa cada vez que desde el input se ingresa un valor.
    
-    soloLetras(letra.value.toUpperCase().palabrAdivinar); //convierto las letras a mayuscula tmb
+    soloLetras(letra.value.toUpperCase(),palabrAdivinar); //convierto las letras a mayuscula tmb
 };
 
 function soloLetras(cadena, palabrAdivinar,arrCoincidencias){
@@ -31,7 +31,17 @@ function soloLetras(cadena, palabrAdivinar,arrCoincidencias){
         document.getElementById("ahorcado").innerHTML = `
             <img src="img/${errados}.png">
         `;
-
+       
+        //manejo de tecla enter, para que tome la siguiente letra
+        document.querySelector('input').addEventListener('keydown', function(event){
+            if(event.key==='Enter'){
+                //captura entrada
+                const letra = document.querySelector('input').value.toUpperCase();
+                //borra entrada
+                document.querySelector('input').value= '';
+                soloLetras(letra,palabrAdivinar,arrCoincidencias);
+            }
+        })
 
         return true;
     }
@@ -116,16 +126,16 @@ function leyendaCoincidencia(coincidencias){
 };
 
 function victoria(){
-    if(vidas<0){
+    if(aciertos == palabrAdivinar.length){
         document.getElementById("palabras").innerHTML = `
-        <h3> Perdiste :( </h3>
-        <h4>La palabra es ${palabrAdivinar}</h4>
+            <h3> GANASTE :D </h3>
+            <h4>La palabra es ${palabrAdivinar.join('')}</h4>
+        `;
+    } else if (vidas < 0){
+        document.getElementById("palabras").innerHTML = `
+            <h3> Perdiste :( </h3>
+            <h4>La palabra es ${palabrAdivinar.join('')}</h4>
         `;
     }
-    else if(aciertos == palabrAdivinar.length){
-        document.getElementById("palabras").innerHTML = `
-        <h3> GANASTE :D </h3>
-        <h4>La palabra era ${palabrAdivinar}</h4>
-        `;
-    }
+    
 }
