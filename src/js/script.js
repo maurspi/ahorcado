@@ -12,40 +12,41 @@ letra.oninput = function(){  //onInput se activa cada vez que desde el input se 
     soloLetras(letra.value.toUpperCase(),palabrAdivinar); //convierto las letras a mayuscula tmb
 };
 
-function soloLetras(cadena, palabrAdivinar,arrCoincidencias){
+function soloLetras(cadena, palabrAdivinar, arrCoincidencias) {
     const pattern = new RegExp('[a-zA-Z]'); //Patrón de búsqueda para manipular cadenas de texto.
     console.log(pattern.test(cadena)); //Test: evalúa si una cadena de texto coincide con una expresión regular.
-    if(!pattern.test(cadena)){
-        document.querySelector('input').value = ""; //vuelve a nada el valor del input
-        document.getElementById("status").innerHTML = "Solo puedes ingresar letras!!!";
-        return false;
-    }else{
-        document.getElementById("tablero").innerHTML = `
-        <table border="1">
-            <tr>
-                ${buscarCoincidencia(cadena,palabrAdivinar,arrCoincidencias)}    
-            </tr>    
-        </table>
-    `;
-
-        document.getElementById("ahorcado").innerHTML = `
-            <img src="img/${errados}.png">
-        `;
-       
-        //manejo de tecla enter, para que tome la siguiente letra
-        document.querySelector('input').addEventListener('keydown', function(event){
-            if(event.key==='Enter'){
-                //captura entrada
-                const letra = document.querySelector('input').value.toUpperCase();
-                //borra entrada
-                document.querySelector('input').value= '';
-                soloLetras(letra,palabrAdivinar,arrCoincidencias);
-            }
-        })
-
-        return true;
+    if (!pattern.test(cadena)) {
+      document.getElementById('letraInput').value = ''; //vuelve a nada el valor del input
+      document.getElementById('status').innerHTML = 'Solo puedes ingresar letras!!!';
+      return false;
+    } else {
+      document.getElementById('tablero').innerHTML = `
+      <table border="1">
+          <tr>
+              ${buscarCoincidencia(cadena, palabrAdivinar, arrCoincidencias)}    
+          </tr>    
+      </table>
+  `;
+  
+      document.getElementById('ahorcado').innerHTML = `
+          <img src="img/${errados}.png">
+      `;
+  /*
+      //manejo de tecla enter, para que tome la siguiente letra
+      document.getElementById('letraInput').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          //captura entrada
+          const letra = document.getElementById('letraInput').value.toUpperCase();
+          //borra entrada
+          document.getElementById('letraInput').value = '';
+          soloLetras(letra, palabrAdivinar, arrCoincidencias);
+        }
+      });
+  */
+      return true;
     }
-};
+  };
+  
 
 
 function ingresarPalabra(){
@@ -92,10 +93,6 @@ function buscarCoincidencia(letra, arrPalabra){
             arrCoincidencias.push(caracter);
         } else if (arrCoincidencias.includes(caracter)){
             tablero = tablero + "<td style='background-color: #C5D8A4'>"+ caracter +" </td>"; //letra que ya está
-
-            // document.getElementById("usadas").innerHTML = `
-            // <h3> ${arrUsadas} </h3>
-            // `;
 
         }else{
             tablero = tablero + "<td> ? </td>";
